@@ -1,6 +1,7 @@
 import contactBook.Contact;
 import contactBook.ContactBook;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -13,6 +14,7 @@ public class Main {
     public static final String SET_PHONE      = "SP";
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
+    public static final String EQUAL_PHONES   = "EP";
     public static final String QUIT           = "Q";
 
     //Constantes que definem as mensagens para o utilizador
@@ -23,6 +25,8 @@ public class Main {
     public static final String CONTACT_UPDATED = "contactBook.Contact updated.";
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
     public static final String QUIT_MSG = "Goodbye!";
+    public static final String EXIST_EQUAL_PHONES = "There are contacts that share phone numbers.";
+    public static final String NO_EQUAL_PHONES = "All contacts have different phone numbers.";
     public static final String COMMAND_ERROR = "You are being dumb! Try another command!";
 
     public static void main(String[] args) {
@@ -53,6 +57,9 @@ public class Main {
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
                     break;
+                case EQUAL_PHONES:
+                    analyseEqualPhones(cBook);
+                    break;
                 default:
                     System.out.println(COMMAND_ERROR);
             }
@@ -62,6 +69,14 @@ public class Main {
         System.out.println(QUIT_MSG);
         System.out.println();
         in.close();
+    }
+
+    private static void analyseEqualPhones(ContactBook cBook) {
+        // find if there are contacts with equal phones
+        if (cBook.hasEqualPhones()) {
+            System.out.println(EXIST_EQUAL_PHONES);
+        }
+        else System.out.println(NO_EQUAL_PHONES);
     }
 
     private static String getCommand(Scanner in) {

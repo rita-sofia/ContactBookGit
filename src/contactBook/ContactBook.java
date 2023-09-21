@@ -93,4 +93,19 @@ public class ContactBook {
         return contacts[currentContact++];
     }
 
+    public boolean hasEqualPhones() {
+        boolean found = false;
+        int i = 0;
+        while (i<counter && !found) {
+            int j = i+1;
+            while (j<counter && !found)
+                if (contacts[i].getPhone() == contacts[j].getPhone())
+                    found = true;
+                else
+                    j++;
+            i++;
+        }
+        return found;
+    }
+
 }
