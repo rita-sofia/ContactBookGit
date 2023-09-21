@@ -20,6 +20,13 @@ public class ContactBook {
         return searchIndex(name) >= 0;
     }
 
+    public boolean hasContactWithPhone(int phone) {
+        for (Contact c : contacts)
+            if (c.getPhone() == phone)
+                return true;
+        return false;
+    }
+
     public int getNumberOfContacts() {
         return counter;
     }
@@ -48,6 +55,14 @@ public class ContactBook {
     //Pre: name != null && hasContact(name)
     public String getEmail(String name) {
         return contacts[searchIndex(name)].getEmail();
+    }
+
+    //Pre: hasContactWithPhone(phone)
+    public Contact getContact(int phone) {
+        for (int i = 0; i < counter; i++)
+            if (contacts[i].getPhone() == phone)
+                return contacts[i];
+        return null;
     }
 
     //Pre: name != null && hasContact(name)
